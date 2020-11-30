@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyFirstStatefulWidget(),
     );
   }
 }
@@ -112,6 +112,43 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class MyFirstStatelessWidget extends StatelessWidget {
+  int _buildCallingCounter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    _buildCallingCounter++;
+    print('Метод build был вызван $_buildCallingCounter раз(а)');
+
+    return Container(
+      child: Center(
+        child: Text('Hello! I am stateless.'),
+      ),
+    );
+  }
+}
+
+class MyFirstStatefulWidget extends StatefulWidget {
+  @override
+  _MyFirstStatefulWidgetState createState() => _MyFirstStatefulWidgetState();
+}
+
+class _MyFirstStatefulWidgetState extends State<MyFirstStatefulWidget> {
+  int _buildCallingCounter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    _buildCallingCounter++;
+    print('Метод build был вызван $_buildCallingCounter раз(а)');
+
+    return Container(
+      child: Center(
+        child: Text('Hello!\nI am\nstateful.'),
+      ),
     );
   }
 }
