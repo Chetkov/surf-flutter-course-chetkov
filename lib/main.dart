@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(App());
 }
 
 class MyApp extends StatelessWidget {
@@ -116,6 +116,17 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class App extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyFirstStatefulWidget(),
+      title: 'Some title',
+    );
+  }
+}
+
+
 class MyFirstStatelessWidget extends StatelessWidget {
   int _buildCallingCounter = 0;
 
@@ -130,6 +141,10 @@ class MyFirstStatelessWidget extends StatelessWidget {
       ),
     );
   }
+
+  // Так работать не будет, т.к. context вне области видимости и не является
+  // переменной класса
+  // Type getContextRuntimeType() => context.runtimeType;
 }
 
 class MyFirstStatefulWidget extends StatefulWidget {
@@ -144,6 +159,7 @@ class _MyFirstStatefulWidgetState extends State<MyFirstStatefulWidget> {
   Widget build(BuildContext context) {
     _buildCallingCounter++;
     print('Метод build был вызван $_buildCallingCounter раз(а)');
+    print(getContextRuntimeType());
 
     return Container(
       child: Center(
@@ -151,4 +167,7 @@ class _MyFirstStatefulWidgetState extends State<MyFirstStatefulWidget> {
       ),
     );
   }
+
+  // Так вс в порядке, т.к. State реализует get context
+  Type getContextRuntimeType() => context.runtimeType;
 }
