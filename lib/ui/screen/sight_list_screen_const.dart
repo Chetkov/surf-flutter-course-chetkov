@@ -1,0 +1,4 @@
+const APP_BAR_TITLE = 'Sight list';
+
+const BOTTOM_NAVIGATION_BAR_ITEM_HOME = 'Home';
+const BOTTOM_NAVIGATION_BAR_ITEM_MESSAGES = 'Messages';
