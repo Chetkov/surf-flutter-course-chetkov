@@ -13,7 +13,7 @@ class _SightListScreenState extends State<SightListScreen> {
         title: Text(
           'Список\nинтересных мест',
           style: TextStyle(
-            color: Colors.black,
+            color: Color(0xff3B3E5B),
             fontFamily: 'Roboto',
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.bold,
@@ -23,7 +23,7 @@ class _SightListScreenState extends State<SightListScreen> {
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
-        toolbarHeight: 100,
+        toolbarHeight: 128,
       )
     );
   }
