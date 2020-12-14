@@ -6,11 +6,11 @@ class Coordinates {
 }
 
 class Sight {
-  String sightName;
+  String name;
   Coordinates coordinates;
-  String url;
+  String imageUrl;
   String details;
   String type;
 
-  Sight(this.sightName, this.coordinates, this.url, this.details, this.type);
+  Sight(this.name, this.coordinates, this.imageUrl, this.details, this.type);
 }
