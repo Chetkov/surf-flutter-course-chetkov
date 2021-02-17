@@ -7,6 +7,7 @@ var defaultTextStyle = TextStyle(
   color: Color(0xff3B3E5B),
 );
 
+/// Экран карточки места
 class SightDetailsScreen extends StatefulWidget {
   final Sight _sight;
 
@@ -28,8 +29,8 @@ class _SightDetailsState extends State<SightDetailsScreen> {
         child: Column(
           children: [
             SightDetailsGallery(_sight),
-            Container(
-              margin: EdgeInsets.only(top: 24, left: 16, right: 16),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -41,8 +42,8 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                       fontSize: 24,
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 2),
+                  Padding(
+                    padding: EdgeInsets.only(top: 2),
                     child: Wrap(
                       spacing: 16,
                       children: [
@@ -64,8 +65,8 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 24),
+                  Padding(
+                    padding: EdgeInsets.only(top: 24),
                     child: Text(
                       _sight.details,
                       style: defaultTextStyle.copyWith(
@@ -106,8 +107,8 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                     height: 0.6,
                     color: Colors.black.withAlpha(56),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 8, bottom: 8),
+                  Padding(
+                    padding: EdgeInsets.only(top: 8, bottom: 8),
                     child: Row(
                       children: [
                         Expanded(
@@ -182,13 +183,7 @@ class SightDetailsGallery extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          height: 360,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(_sight.imageUrl), fit: BoxFit.cover),
-          ),
-        ),
+        Image(height: 360, image: NetworkImage(_sight.imageUrl), fit: BoxFit.cover),
         Positioned(
           child: Container(
             decoration: BoxDecoration(
