@@ -24,16 +24,17 @@ class _SightListScreenState extends State<SightListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SightListAppBar(),
-      body: SightListBody(_sights),
+      appBar: _SightListAppBar(),
+      body: _SightListBody(_sights),
     );
   }
 }
 
-class SightListAppBar extends StatelessWidget with PreferredSizeWidget {
+/// Виджет App бара для экрана со списком мест
+class _SightListAppBar extends StatelessWidget with PreferredSizeWidget {
   final double _height;
 
-  SightListAppBar([this._height = 152]);
+  _SightListAppBar([this._height = 152]);
 
   @override
   Widget build(BuildContext context) {
@@ -61,29 +62,22 @@ class SightListAppBar extends StatelessWidget with PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(_height);
 }
 
-class SightListBody extends StatelessWidget {
+/// Виджет списка для экрана со списком мест
+class _SightListBody extends StatelessWidget {
   final List<Sight> _sights;
 
-  const SightListBody(this._sights, {Key key}) : super(key: key);
+  const _SightListBody(this._sights, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        margin: EdgeInsets.only(left: 16, right: 16),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
-          children: _makeSightCards(),
+          children: _sights.map((sight) => SightCard(sight)).toList(),
         ),
       ),
     );
-  }
-
-  List<Widget> _makeSightCards() {
-    List<SightCard> sightCards = [];
-    for (var sight in _sights) {
-      sightCards.add(SightCard(sight));
-    }
-    return sightCards;
   }
 }
 
