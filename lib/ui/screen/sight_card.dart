@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 
+/// Виджет карточки места для страницы списка мест
 class SightCard extends StatelessWidget {
   final Sight _sight;
 
@@ -9,20 +10,19 @@ class SightCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(minWidth: 328, minHeight: 188),
       margin: EdgeInsets.only(bottom: 16),
       child: Column(
         children: [
-          _makeTopPart(),
-          _makeBottomPart(),
+          _buildTopPart(),
+          _buildBottomPart(),
         ],
       ),
     );
   }
 
-  _makeTopPart() {
+  _buildTopPart() {
     var typeText = Container(
-      constraints: BoxConstraints(minWidth: 328),
+      width: double.infinity,
       margin: EdgeInsets.only(left: 16, right: 16, top: 16),
       child: Text(
         _sight.type,
@@ -36,18 +36,7 @@ class SightCard extends StatelessWidget {
       ),
     );
 
-    var toWishListButton = Positioned(
-      top: 19,
-      right: 18,
-      child: Container(
-        width: 20,
-        height: 20,
-        child: Icon(Icons.favorite_border, color: Colors.white),
-      ),
-    );
-
     return Container(
-      constraints: BoxConstraints(minWidth: 328),
       height: 96,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(
@@ -60,15 +49,15 @@ class SightCard extends StatelessWidget {
       child: Stack(
         children: [
           typeText,
-          toWishListButton,
+          ButtonToWishList(),
         ],
       ),
     );
   }
 
-  _makeBottomPart() {
-    var nameText = Container(
-      constraints: BoxConstraints(minWidth: 328),
+  _buildBottomPart() {
+    var title = Container(
+      alignment: Alignment.topLeft,
       margin: EdgeInsets.only(left: 16, right: 16, top: 16),
       child: Text(
         _sight.name,
@@ -82,8 +71,7 @@ class SightCard extends StatelessWidget {
       ),
     );
 
-    var detailsText = Container(
-      constraints: BoxConstraints(minWidth: 328),
+    var details = Container(
       margin: EdgeInsets.only(left: 16, right: 16, top: 2),
       child: Text(
         _sight.details,
@@ -98,7 +86,6 @@ class SightCard extends StatelessWidget {
     );
 
     return Container(
-      constraints: BoxConstraints(minWidth: 328),
       height: 92,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(
@@ -108,9 +95,40 @@ class SightCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          nameText,
-          detailsText,
+          title,
+          details,
         ],
+      ),
+    );
+  }
+}
+
+/// Виджет кнопки добавить в список желаний
+class ButtonToWishList extends StatelessWidget {
+  final double _width;
+  final double _height;
+  final double _top;
+  final double _right;
+
+  ButtonToWishList(
+      {double width = 20,
+      double height = 20,
+      double top = 19,
+      double right = 18})
+      : _top = top,
+        _right = right,
+        _width = width,
+        _height = height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: _top,
+      right: _right,
+      child: Container(
+        width: _width,
+        height: _height,
+        child: Icon(Icons.favorite_border, color: Colors.white),
       ),
     );
   }
