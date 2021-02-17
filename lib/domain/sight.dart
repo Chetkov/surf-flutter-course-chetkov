@@ -1,3 +1,4 @@
+/// Класс для хранения координат места
 class Coordinates {
   double latitude;
   double longitude;
@@ -5,6 +6,7 @@ class Coordinates {
   Coordinates(this.latitude, this.longitude);
 }
 
+/// Класс для хранения основной информации о месте
 class Sight {
   String name;
   Coordinates coordinates;
