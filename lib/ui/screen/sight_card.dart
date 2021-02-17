@@ -9,13 +9,16 @@ class SightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16),
-      child: Column(
-        children: [
-          _buildTopPart(),
-          _buildBottomPart(),
-        ],
+    return AspectRatio(
+      aspectRatio: 3/2,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 16),
+        child: Column(
+          children: [
+            _buildTopPart(),
+            _buildBottomPart(),
+          ],
+        ),
       ),
     );
   }
@@ -71,8 +74,8 @@ class SightCard extends StatelessWidget {
       ),
     );
 
-    var details = Container(
-      margin: EdgeInsets.only(left: 16, right: 16, top: 2),
+    var details = Padding(
+      padding: EdgeInsets.only(left: 16, right: 16, top: 2),
       child: Text(
         _sight.details,
         style: defaultTextStyle.copyWith(
