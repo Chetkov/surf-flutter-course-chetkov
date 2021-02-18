@@ -1,11 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
-
-var defaultTextStyle = TextStyle(
-  decoration: TextDecoration.none,
-  fontFamily: 'Roboto',
-  color: Color(0xff3B3E5B),
-);
+import 'package:places/ui/res/colors.dart';
+import 'package:places/ui/res/text_styles.dart';
 
 /// Экран карточки места
 class SightDetailsScreen extends StatefulWidget {
@@ -37,10 +34,7 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                   Text(
                     _sight.name,
                     textAlign: TextAlign.left,
-                    style: defaultTextStyle.copyWith(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24,
-                    ),
+                    style: textBold24,
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 2),
@@ -49,18 +43,11 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                       children: [
                         Text(
                           _sight.type,
-                          style: defaultTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: textBold14,
                         ),
                         Text(
                           'Закрыто до 09:00',
-                          style: TextStyle(
-                            color: Color(0xff7C7E92),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: textRegular14Secondary,
                         ),
                       ],
                     ),
@@ -69,38 +56,38 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                     padding: EdgeInsets.only(top: 24),
                     child: Text(
                       _sight.details,
-                      style: defaultTextStyle.copyWith(
+                      style: textBold.copyWith(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
                   Container(
+                    height: 48,
                     margin: EdgeInsets.only(top: 24),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Color(0xff4CAF50),
+                      color: btnColorPrimary,
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
-                    child: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      spacing: 10,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.map,
                           color: Colors.white,
                         ),
-                        Text(
-                          'ПОСТРОИТЬ МАРШРУТ',
-                          style: defaultTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                        Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            'ПОСТРОИТЬ МАРШРУТ',
+                            style: textBold14.copyWith(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    height: 48,
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 24),
@@ -115,21 +102,20 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                           child: Container(
                             height: 48,
                             alignment: Alignment.center,
-                            child: Wrap(
-                              alignment: WrapAlignment.center,
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              spacing: 14,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
                                   Icons.calendar_today,
                                   color: Colors.black.withAlpha(56),
                                 ),
-                                Text(
-                                  'Запланировать',
-                                  style: defaultTextStyle.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black.withAlpha(56),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 14),
+                                  child: Text(
+                                    'Запланировать',
+                                    style: textRegular14.copyWith(
+                                      color: Colors.black.withAlpha(56),
+                                    ),
                                   ),
                                 )
                               ],
@@ -140,21 +126,18 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                           child: Container(
                             height: 48,
                             alignment: Alignment.center,
-                            child: Wrap(
-                              alignment: WrapAlignment.center,
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              spacing: 14,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(
                                   Icons.favorite_border,
-                                  color: Color(0xff3B3E5B),
+                                  color: textColorPrimary,
                                 ),
-                                Text(
-                                  'В избранное',
-                                  style: defaultTextStyle.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff3B3E5B),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 14),
+                                  child: Text(
+                                    'В избранное',
+                                    style: textRegular14,
                                   ),
                                 )
                               ],

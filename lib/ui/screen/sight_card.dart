@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/ui/res/text_styles.dart';
 
 /// Виджет карточки места для страницы списка мест
 class SightCard extends StatelessWidget {
@@ -26,9 +27,7 @@ class SightCard extends StatelessWidget {
       margin: EdgeInsets.only(left: 16, right: 16, top: 16),
       child: Text(
         _sight.type,
-        style: defaultTextStyle.copyWith(
-          fontSize: 14,
-          fontWeight: FontWeight.w700,
+        style: textBold14.copyWith(
           color: Colors.white,
         ),
         maxLines: 1,
@@ -61,10 +60,9 @@ class SightCard extends StatelessWidget {
       margin: EdgeInsets.only(left: 16, right: 16, top: 16),
       child: Text(
         _sight.name,
-        style: defaultTextStyle.copyWith(
+        style: textRegular.copyWith(
           fontSize: 16,
           fontWeight: FontWeight.w500,
-          color: Color(0xff3B3E5B),
         ),
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
@@ -75,11 +73,7 @@ class SightCard extends StatelessWidget {
       margin: EdgeInsets.only(left: 16, right: 16, top: 2),
       child: Text(
         _sight.details,
-        style: defaultTextStyle.copyWith(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: Color(0xff7C7E92),
-        ),
+        style: textRegular14Secondary,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       ),
@@ -133,8 +127,3 @@ class ButtonToWishList extends StatelessWidget {
     );
   }
 }
-
-const defaultTextStyle = TextStyle(
-  decoration: TextDecoration.none,
-  fontFamily: 'Roboto',
-);
