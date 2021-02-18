@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/sight_card.dart';
-
-var defaultTextStyle = TextStyle(
-  fontFamily: 'Roboto',
-  fontStyle: FontStyle.normal,
-);
 
 class SightListScreen extends StatefulWidget {
   final List<Sight> _sights;
@@ -45,11 +41,7 @@ class _SightListAppBar extends StatelessWidget with PreferredSizeWidget {
         padding: EdgeInsets.only(bottom: 16),
         child: Text(
           'Список\nинтересных мест',
-          style: defaultTextStyle.copyWith(
-            color: Color(0xff3B3E5B),
-            fontWeight: FontWeight.bold,
-            fontSize: 32,
-          ),
+          style: textBold32,
         ),
       ),
       toolbarHeight: _height,
