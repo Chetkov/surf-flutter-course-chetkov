@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
@@ -73,10 +73,7 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.map,
-                          color: Colors.white,
-                        ),
+                        SvgPicture.asset('res/icons/go-white.svg'),
                         Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
@@ -105,10 +102,8 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(
-                                  Icons.calendar_today,
-                                  color: Colors.black.withAlpha(56),
-                                ),
+                                SvgPicture.asset(
+                                    'res/icons/calendar-dark-transparent.svg'),
                                 Padding(
                                   padding: EdgeInsets.only(left: 14),
                                   child: Text(
@@ -129,10 +124,7 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(
-                                  Icons.favorite_border,
-                                  color: textColorPrimary,
-                                ),
+                                SvgPicture.asset('res/icons/heart-dark.svg'),
                                 Padding(
                                   padding: EdgeInsets.only(left: 14),
                                   child: Text(
@@ -166,7 +158,18 @@ class SightDetailsGallery extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image(height: 360, image: NetworkImage(_sight.imageUrl), fit: BoxFit.cover),
+        SizedBox(
+          height: 360,
+          child: Image.network(
+            _sight.imageUrl,
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, progress) {
+              return progress != null
+                  ? Center(child: CircularProgressIndicator())
+                  : child;
+            },
+          ),
+        ),
         Positioned(
           child: Container(
             decoration: BoxDecoration(
@@ -180,7 +183,7 @@ class SightDetailsGallery extends StatelessWidget {
           ),
           top: 36,
           left: 16,
-        )
+        ),
       ],
     );
   }
