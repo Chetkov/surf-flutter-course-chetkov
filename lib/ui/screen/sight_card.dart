@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/res/text_styles.dart';
 
 /// Виджет карточки места для страницы списка мест
 class SightCard extends StatelessWidget {
   final Sight _sight;
+  final Color _topBackgroundColor;
+  final Color _bottomBackgroundColor;
 
-  SightCard(this._sight);
+  SightCard(
+    this._sight, {
+    Color topBackgroundColor = Colors.blueGrey,
+    Color bottomBackgroundColor = const Color(0xffF5F5F5),
+  })  : _topBackgroundColor = topBackgroundColor,
+        _bottomBackgroundColor = bottomBackgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +43,27 @@ class SightCard extends StatelessWidget {
       ),
     );
 
-    return Container(
+    return SizedBox(
       height: 96,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(16),
-          ),
-          image: DecorationImage(
-            fit: BoxFit.fitWidth,
-            image: NetworkImage(_sight.imageUrl),
-          )),
       child: Stack(
+        fit: StackFit.expand,
         children: [
+          Container(
+            child: ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              child: Image.network(
+                _sight.imageUrl,
+                fit: BoxFit.cover,
+                loadingBuilder: (context, child, progress) => progress != null
+                    ? Container(
+                        height: 96,
+                        color: _topBackgroundColor,
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                    : child,
+              ),
+            ),
+          ),
           typeText,
           ButtonToWishList(),
         ],
@@ -85,7 +102,7 @@ class SightCard extends StatelessWidget {
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(16),
         ),
-        color: Color(0xffF5F5F5),
+        color: _bottomBackgroundColor,
       ),
       child: Column(
         children: [
@@ -99,20 +116,14 @@ class SightCard extends StatelessWidget {
 
 /// Виджет кнопки добавить в список желаний
 class ButtonToWishList extends StatelessWidget {
-  final double _width;
-  final double _height;
   final double _top;
   final double _right;
 
-  ButtonToWishList(
-      {double width = 20,
-      double height = 20,
-      double top = 19,
-      double right = 18})
-      : _top = top,
-        _right = right,
-        _width = width,
-        _height = height;
+  ButtonToWishList({
+    double top = 16,
+    double right = 16,
+  })  : _top = top,
+        _right = right;
 
   @override
   Widget build(BuildContext context) {
@@ -120,9 +131,7 @@ class ButtonToWishList extends StatelessWidget {
       top: _top,
       right: _right,
       child: Container(
-        width: _width,
-        height: _height,
-        child: Icon(Icons.favorite_border, color: Colors.white),
+        child: SvgPicture.asset('res/icons/heart-white.svg'),
       ),
     );
   }
