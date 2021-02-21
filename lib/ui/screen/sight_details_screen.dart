@@ -91,52 +91,52 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                     height: 0.6,
                     color: Colors.black.withAlpha(56),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 8, bottom: 8),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 48,
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(
-                                    'res/icons/calendar-dark-transparent.svg'),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 14),
-                                  child: Text(
-                                    'Запланировать',
-                                    style: textRegular14.copyWith(
-                                      color: Colors.black.withAlpha(56),
+                  SizedBox(
+                    height: 48,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('res/icons/calendar-dark-transparent.svg'),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 14),
+                                    child: Text(
+                                      'Запланировать',
+                                      style: textRegular14.copyWith(
+                                        color: Colors.black.withAlpha(56),
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 48,
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset('res/icons/heart-dark.svg'),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 14),
-                                  child: Text(
-                                    'В избранное',
-                                    style: textRegular14,
-                                  ),
-                                )
-                              ],
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('res/icons/heart-dark.svg'),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 14),
+                                    child: Text(
+                                      'В избранное',
+                                      style: textRegular14,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   )
                 ],

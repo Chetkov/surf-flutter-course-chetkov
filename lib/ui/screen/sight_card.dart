@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
 
 /// Виджет карточки места для страницы списка мест
@@ -11,15 +12,15 @@ class SightCard extends StatelessWidget {
 
   SightCard(
     this._sight, {
-    Color topBackgroundColor = Colors.blueGrey,
-    Color bottomBackgroundColor = const Color(0xffF5F5F5),
+    Color topBackgroundColor = imageBackgroundColor,
+    Color bottomBackgroundColor = backgroundColor,
   })  : _topBackgroundColor = topBackgroundColor,
         _bottomBackgroundColor = bottomBackgroundColor;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16),
+    return Padding(
+      padding: EdgeInsets.only(bottom: 16),
       child: Column(
         children: [
           _buildTopPart(),
@@ -30,9 +31,8 @@ class SightCard extends StatelessWidget {
   }
 
   _buildTopPart() {
-    var typeText = Container(
-      width: double.infinity,
-      margin: EdgeInsets.only(left: 16, right: 16, top: 16),
+    var typeText = Padding(
+      padding: EdgeInsets.only(left: 16, right: 16, top: 16),
       child: Text(
         _sight.type,
         style: textBold14.copyWith(
@@ -56,7 +56,7 @@ class SightCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 loadingBuilder: (context, child, progress) => progress != null
                     ? Container(
-                        height: 96,
+                        height: double.infinity,
                         color: _topBackgroundColor,
                         child: Center(child: CircularProgressIndicator()),
                       )
