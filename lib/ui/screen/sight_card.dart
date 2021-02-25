@@ -4,18 +4,100 @@ import 'package:places/domain/sight.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
 
+class WishedSightCard extends SightCard {
+  WishedSightCard(Sight sight) : super(sight);
+
+  @override
+  Widget _buildSpecificInfo() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      margin: const EdgeInsets.only(top: 2),
+      child: Text(
+        'Запланировано на 12 окт. 2020',
+        style: textRegular14.copyWith(color: Colors.green),
+      ),
+    );
+  }
+
+  @override
+  Widget _buildButtons() {
+    return Container(
+      height: 25,
+      alignment: Alignment.centerRight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: SvgPicture.asset('res/icons/calendar-white.svg'),
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: SvgPicture.asset('res/icons/close-white.svg'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class VisitedSightCard extends SightCard {
+  VisitedSightCard(Sight sight) : super(sight);
+
+  @override
+  Widget _buildSpecificInfo() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      margin: const EdgeInsets.only(top: 2),
+      child: Text(
+        'Цель достигнута 12 окт. 2020',
+        style: textRegular14Secondary,
+      ),
+    );
+  }
+
+  @override
+  Widget _buildButtons() {
+    return Container(
+      height: 25,
+      alignment: Alignment.centerRight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: SvgPicture.asset('res/icons/share-white.svg'),
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: SvgPicture.asset('res/icons/close-white.svg'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 /// Виджет карточки места для страницы списка мест
 class SightCard extends StatelessWidget {
   final Sight _sight;
-  final Color _topBackgroundColor;
-  final Color _bottomBackgroundColor;
+  final Color _imageBackgroundColor;
+  final Color _backgroundColor;
 
   SightCard(
     this._sight, {
-    Color topBackgroundColor = imageBackgroundColor,
-    Color bottomBackgroundColor = backgroundColor,
-  })  : _topBackgroundColor = topBackgroundColor,
-        _bottomBackgroundColor = bottomBackgroundColor;
+    Color imageBackgroundColor = imageBackgroundColor,
+    Color backgroundColor = backgroundColor,
+  })  : _imageBackgroundColor = imageBackgroundColor,
+        _backgroundColor = backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +112,57 @@ class SightCard extends StatelessWidget {
     );
   }
 
-  _buildTopPart() {
-    var typeText = Padding(
-      padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+  Widget _buildTopPart() {
+    return SizedBox(
+      height: 96,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          _buildImage(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: _buildType(),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: _buildButtons(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildImage() {
+    return Container(
+      child: ClipRRect(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        child: Image.network(
+          _sight.imageUrl,
+          fit: BoxFit.cover,
+          loadingBuilder: (context, child, progress) => progress != null
+              ? Container(
+                  height: double.infinity,
+                  color: _imageBackgroundColor,
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              : child,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildType() {
+    return Container(
+      height: 25,
+      alignment: Alignment.centerLeft,
       child: Text(
         _sight.type,
         style: textBold14.copyWith(
@@ -42,41 +172,44 @@ class SightCard extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
     );
+  }
 
-    return SizedBox(
-      height: 96,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          Container(
-            child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-              child: Image.network(
-                _sight.imageUrl,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, progress) => progress != null
-                    ? Container(
-                        height: double.infinity,
-                        color: _topBackgroundColor,
-                        child: Center(child: CircularProgressIndicator()),
-                      )
-                    : child,
-              ),
-            ),
-          ),
-          typeText,
-          ButtonToWishList(),
-        ],
+  Widget _buildButtons() {
+    return Container(
+      height: 25,
+      alignment: Alignment.centerRight,
+      child: SvgPicture.asset('res/icons/heart-white.svg'),
+    );
+  }
+
+  Widget _buildBottomPart() {
+    return Container(
+      height: 92,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(16),
+        ),
+        color: _backgroundColor,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            _buildTitle(),
+            _buildSpecificInfo(),
+            _buildSchedule(),
+          ],
+        ),
       ),
     );
   }
 
-  _buildBottomPart() {
-    var title = Container(
+  Widget _buildTitle() {
+    return Align(
       alignment: Alignment.topLeft,
-      margin: EdgeInsets.only(left: 16, right: 16, top: 16),
       child: Text(
         _sight.name,
+        textAlign: TextAlign.left,
         style: textRegular.copyWith(
           fontSize: 16,
           fontWeight: FontWeight.w500,
@@ -85,54 +218,20 @@ class SightCard extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       ),
     );
+  }
 
-    var details = Container(
-      margin: EdgeInsets.only(left: 16, right: 16, top: 2),
-      child: Text(
-        _sight.details,
-        style: textRegular14Secondary,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-    );
-
+  Widget _buildSchedule() {
     return Container(
-      height: 92,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(16),
-        ),
-        color: _bottomBackgroundColor,
-      ),
-      child: Column(
-        children: [
-          title,
-          details,
-        ],
+      alignment: Alignment.topLeft,
+      margin: const EdgeInsets.only(top: 2),
+      child: Text(
+        'Закрыто до 20:00',
+        style: textRegular14Secondary,
       ),
     );
   }
-}
 
-/// Виджет кнопки добавить в список желаний
-class ButtonToWishList extends StatelessWidget {
-  final double _top;
-  final double _right;
-
-  ButtonToWishList({
-    double top = 16,
-    double right = 16,
-  })  : _top = top,
-        _right = right;
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: _top,
-      right: _right,
-      child: Container(
-        child: SvgPicture.asset('res/icons/heart-white.svg'),
-      ),
-    );
+  Widget _buildSpecificInfo() {
+    return Container();
   }
 }
