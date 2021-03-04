@@ -11,8 +11,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: SightListScreen(sightMocks),
-      home: SightDetailsScreen(sightMocks[3]),
+      home: SightListScreen([]),
+      // home: SightDetailsScreen(sightMocks[3]),
+      // home: WishedOrVisitedSightListScreen(sightMocks),
       title: 'Some title',
     );
   }

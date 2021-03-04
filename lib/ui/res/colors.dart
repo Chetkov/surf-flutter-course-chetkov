@@ -9,3 +9,5 @@ const Color textColorPrimary = const Color(0xff3B3E5B),
     btnColorPrimary = const Color(0xff4CAF50),
     backgroundColor = const Color(0xffF5F5F5),
     imageBackgroundColor = Colors.blueGrey;
+
+Color textColorThird = textColorSecondary.withOpacity(0.56);
