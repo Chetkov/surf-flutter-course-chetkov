@@ -83,7 +83,7 @@ class _WishedOrVisitedSightListScreenState extends State<WishedOrVisitedSightLis
         ),
         body: TabBarView(
           children: [
-            _WishedSightListBody(_sights.sublist(0, 2)),
+            _WishedSightListBody(_sights.sublist(0, 0)),
             _VisitedSightListBody(_sights.sublist(1, 4)),
             // Center(child: Text('Tab content 1')),
             // Center(child: Text('Tab content 2')),

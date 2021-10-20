@@ -10,4 +10,7 @@ const Color textColorPrimary = const Color(0xff3B3E5B),
     backgroundColor = const Color(0xffF5F5F5),
     imageBackgroundColor = Colors.blueGrey;
 
+const darkMainBackgroundColor = const Color(0xff21222C),
+    darkBottomNavigationBarBackgroundColor = darkMainBackgroundColor;
+
 Color textColorThird = textColorSecondary.withOpacity(0.56);
