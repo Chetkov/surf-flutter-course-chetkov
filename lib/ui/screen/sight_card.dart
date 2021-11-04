@@ -8,6 +8,11 @@ class WishedSightCard extends SightCard {
   WishedSightCard(Sight sight) : super(sight);
 
   @override
+  _WishedSightCardState createState() => _WishedSightCardState();
+}
+
+class _WishedSightCardState extends _SightCardState {
+  @override
   Widget _buildSpecificInfo() {
     return Container(
       alignment: Alignment.centerLeft,
@@ -49,6 +54,11 @@ class VisitedSightCard extends SightCard {
   VisitedSightCard(Sight sight) : super(sight);
 
   @override
+  _VisitedSightCardState createState() => _VisitedSightCardState();
+}
+
+class _VisitedSightCardState extends _SightCardState {
+  @override
   Widget _buildSpecificInfo() {
     return Container(
       alignment: Alignment.centerLeft,
@@ -71,13 +81,27 @@ class VisitedSightCard extends SightCard {
           Expanded(
             child: Align(
               alignment: Alignment.centerRight,
-              child: SvgPicture.asset('res/icons/share-white.svg'),
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                icon: SvgPicture.asset(
+                  'res/icons/share-white.svg',
+                ),
+                onPressed: () {
+                  print("Share-button pressed on place: " + widget._sight.name);
+                },
+              ),
             ),
           ),
           Expanded(
             child: Align(
               alignment: Alignment.centerRight,
-              child: SvgPicture.asset('res/icons/close-white.svg'),
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                icon: SvgPicture.asset('res/icons/close-white.svg'),
+                onPressed: () {
+                  print("Close-button pressed on place: " + widget._sight.name);
+                },
+              ),
             ),
           ),
         ],
@@ -87,7 +111,7 @@ class VisitedSightCard extends SightCard {
 }
 
 /// Виджет карточки места для страницы списка мест
-class SightCard extends StatelessWidget {
+class SightCard extends StatefulWidget {
   final Sight _sight;
   final Color _imageBackgroundColor;
   final Color _backgroundColor;
@@ -99,6 +123,11 @@ class SightCard extends StatelessWidget {
   })  : _imageBackgroundColor = imageBackgroundColor,
         _backgroundColor = backgroundColor;
 
+  @override
+  _SightCardState createState() => _SightCardState();
+}
+
+class _SightCardState extends State<SightCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -145,12 +174,12 @@ class SightCard extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         child: Image.network(
-          _sight.imageUrl,
+          widget._sight.imageUrl,
           fit: BoxFit.cover,
           loadingBuilder: (context, child, progress) => progress != null
               ? Container(
                   height: double.infinity,
-                  color: _imageBackgroundColor,
+                  color: widget._imageBackgroundColor,
                   child: Center(child: CircularProgressIndicator()),
                 )
               : child,
@@ -164,7 +193,7 @@ class SightCard extends StatelessWidget {
       height: 25,
       alignment: Alignment.centerLeft,
       child: Text(
-        _sight.type,
+        widget._sight.type,
         style: textBold14.copyWith(
           color: Colors.white,
         ),
@@ -178,7 +207,19 @@ class SightCard extends StatelessWidget {
     return Container(
       height: 25,
       alignment: Alignment.centerRight,
-      child: SvgPicture.asset('res/icons/heart-white.svg'),
+      child: IconButton(
+        // splashColor: widget._sight.isWished ? Colors.white : Colors.red,
+        padding: EdgeInsets.zero,
+        icon: SvgPicture.asset(
+          'res/icons/heart-white.svg',
+          color: widget._sight.isWished ? wishBtnColorActive : Colors.white,
+        ),
+        onPressed: () {
+          widget._sight.isWished = !widget._sight.isWished;
+          print("Wish-button pressed on place: " + widget._sight.name);
+          setState(() {});
+        },
+      ),
     );
   }
 
@@ -189,7 +230,7 @@ class SightCard extends StatelessWidget {
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(16),
         ),
-        color: _backgroundColor,
+        color: widget._backgroundColor,
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -208,7 +249,7 @@ class SightCard extends StatelessWidget {
     return Align(
       alignment: Alignment.topLeft,
       child: Text(
-        _sight.name,
+        widget._sight.name,
         textAlign: TextAlign.left,
         style: textRegular.copyWith(
           fontSize: 16,

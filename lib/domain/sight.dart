@@ -13,6 +13,7 @@ class Sight {
   String imageUrl;
   String details;
   String type;
+  bool isWished = false;
 
-  Sight(this.name, this.coordinates, this.imageUrl, this.details, this.type);
+  Sight(this.name, this.coordinates, this.imageUrl, this.details, this.type, {this.isWished = false});
 }

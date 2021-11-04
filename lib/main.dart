@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/res/themes.dart';
@@ -12,10 +13,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: darkTheme,
+      theme: lightTheme,
       // home: SightListScreen(sightMocks),
-      // home: SightDetailsScreen(sightMocks[3]),
-      home: WishedOrVisitedSightListScreen(sightMocks),
+      home: SightDetailsScreen(sightMocks[3]),
+      // home: WishedOrVisitedSightListScreen(sightMocks),
       title: 'Some title',
     );
   }

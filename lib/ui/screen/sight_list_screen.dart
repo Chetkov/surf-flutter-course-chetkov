@@ -34,13 +34,16 @@ class _SightListScreenState extends State<SightListScreen> {
 class WishedOrVisitedSightListScreen extends StatefulWidget {
   final List<Sight> _sights;
 
-  const WishedOrVisitedSightListScreen(this._sights, {Key key}) : super(key: key);
+  const WishedOrVisitedSightListScreen(this._sights, {Key key})
+      : super(key: key);
 
   @override
-  _WishedOrVisitedSightListScreenState createState() => _WishedOrVisitedSightListScreenState(_sights);
+  _WishedOrVisitedSightListScreenState createState() =>
+      _WishedOrVisitedSightListScreenState(_sights);
 }
 
-class _WishedOrVisitedSightListScreenState extends State<WishedOrVisitedSightListScreen> {
+class _WishedOrVisitedSightListScreenState
+    extends State<WishedOrVisitedSightListScreen> {
   final List<Sight> _sights;
 
   _WishedOrVisitedSightListScreenState(this._sights);
@@ -191,17 +194,17 @@ abstract class _AbstractSightListBody extends StatelessWidget {
     return _sights.isEmpty == true
         ? _buildEmptyListStub()
         : Padding(
-      padding: EdgeInsets.only(top: 22),
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children:
-            _sights.map((sight) => _buildSightCard(sight)).toList(),
-          ),
-        ),
-      ),
-    );
+            padding: EdgeInsets.only(top: 22),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children:
+                      _sights.map((sight) => _buildSightCard(sight)).toList(),
+                ),
+              ),
+            ),
+          );
   }
 
   SightCard _buildSightCard(Sight sight);
@@ -252,6 +255,9 @@ class BottomNavigationMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      onTap: (int tabIndex) {
+        print("Tapped on tab: " + tabIndex.toString());
+      },
       items: [
         BottomNavigationBarItem(
           icon: SvgPicture.asset('res/icons/bnb-list.svg'),
@@ -273,7 +279,3 @@ class BottomNavigationMenu extends StatelessWidget {
     );
   }
 }
-
-
-
-

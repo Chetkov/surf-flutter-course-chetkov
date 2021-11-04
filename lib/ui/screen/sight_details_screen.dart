@@ -63,23 +63,40 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                     ),
                   ),
                   Container(
-                    height: 48,
                     margin: EdgeInsets.only(top: 24),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: btnColorPrimary,
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Stack(
                       children: [
-                        SvgPicture.asset('res/icons/go-white.svg'),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text(
-                            'ПОСТРОИТЬ МАРШРУТ',
-                            style: textBold14.copyWith(
-                              color: Colors.white,
+                        Container(
+                          height: 48,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: btnColorPrimary,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset('res/icons/go-white.svg'),
+                              Padding(
+                                padding: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  'ПОСТРОИТЬ МАРШРУТ',
+                                  style: textBold14.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Positioned.fill(
+                          child: Material(
+                            type: MaterialType.transparency,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(12),
+                              onTap: () {
+                                print("Navigate to place: " + widget._sight.name);
+                              },
                             ),
                           ),
                         ),
@@ -98,40 +115,54 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset('res/icons/calendar-dark-transparent.svg'),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 14),
-                                    child: Text(
-                                      'Запланировать',
-                                      style: textRegular14.copyWith(
-                                        color: Colors.black.withAlpha(56),
+                            child: InkWell(
+                              onTap: () {
+                                print("Schedule-button tapped on place: " +
+                                    widget._sight.name);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                        'res/icons/calendar-dark-transparent.svg'),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 14),
+                                      child: Text(
+                                        'Запланировать',
+                                        style: textRegular14.copyWith(
+                                          color: Colors.black.withAlpha(56),
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                ],
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset('res/icons/heart-dark.svg'),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 14),
-                                    child: Text(
-                                      'В избранное',
-                                      style: textRegular14,
-                                    ),
-                                  )
-                                ],
+                            child: InkWell(
+                              onTap: () {
+                                print("ToWishList-button tapped on place: " +
+                                    widget._sight.name);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                        'res/icons/heart-dark.svg'),
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 14),
+                                      child: Text(
+                                        'В избранное',
+                                        style: textRegular14,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -174,11 +205,17 @@ class SightDetailsGallery extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.circular(10),
             ),
-            child: IconButton(
-              icon: Icon(Icons.arrow_back_ios_sharp),
-              onPressed: () {},
+            child: Material(
+              type: MaterialType.transparency,
+              borderRadius: BorderRadius.circular(10),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios_sharp),
+                onPressed: () {
+                  print("Pressed back-button on place: " + _sight.name);
+                },
+              ),
             ),
           ),
           top: 36,
