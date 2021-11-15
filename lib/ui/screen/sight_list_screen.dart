@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:places/domain/filter_model.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
 import 'package:places/ui/screen/sight_card.dart';
+import 'package:places/ui/screen/sight_details_screen.dart';
+import 'package:places/ui/widget/custom_range_slider.dart';
+import 'package:provider/provider.dart';
+
+import '../../mocks.dart';
+import 'filter_screen.dart';
 
 /// Экран списка мест
 class SightListScreen extends StatefulWidget {
   final List<Sight> _sights;
 
-  const SightListScreen(this._sights, {Key key}) : super(key: key);
+  const SightListScreen(this._sights, {Key? key}) : super(key: key);
 
   @override
   _SightListScreenState createState() => _SightListScreenState(_sights);
@@ -25,7 +32,6 @@ class _SightListScreenState extends State<SightListScreen> {
     return Scaffold(
       appBar: _SightListAppBar(),
       body: _SightListBody(_sights),
-      bottomNavigationBar: BottomNavigationMenu(),
     );
   }
 }
@@ -34,7 +40,7 @@ class _SightListScreenState extends State<SightListScreen> {
 class WishedOrVisitedSightListScreen extends StatefulWidget {
   final List<Sight> _sights;
 
-  const WishedOrVisitedSightListScreen(this._sights, {Key key})
+  const WishedOrVisitedSightListScreen(this._sights, {Key? key})
       : super(key: key);
 
   @override
@@ -92,7 +98,6 @@ class _WishedOrVisitedSightListScreenState
             // Center(child: Text('Tab content 2')),
           ],
         ),
-        bottomNavigationBar: BottomNavigationMenu(),
       ),
     );
   }
@@ -246,36 +251,6 @@ class EmptyListStub extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-/// Нижнее навигационное меню
-class BottomNavigationMenu extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      onTap: (int tabIndex) {
-        print("Tapped on tab: " + tabIndex.toString());
-      },
-      items: [
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset('res/icons/bnb-list.svg'),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset('res/icons/bnb-map.svg'),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset('res/icons/bnb-heart.svg'),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset('res/icons/bnb-settings.svg'),
-          label: '',
-        ),
-      ],
     );
   }
 }

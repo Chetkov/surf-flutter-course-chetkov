@@ -132,22 +132,52 @@ class _SightCardState extends State<SightCard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(bottom: 16),
-      child: Column(
-        children: [
-          _buildTopPart(),
-          _buildBottomPart(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTopPart() {
-    return SizedBox(
-      height: 96,
       child: Stack(
-        fit: StackFit.expand,
         children: [
-          _buildImage(),
+          Container(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 96,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      _buildImage(),
+                    ]
+                  ),
+                ),
+                Container(
+                  height: 92,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(16),
+                    ),
+                    color: widget._backgroundColor,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        _buildTitle(),
+                        _buildSpecificInfo(),
+                        _buildSchedule(),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned.fill(
+            child: Material(
+              type: MaterialType.transparency,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(16),
+                onTap: () {
+                },
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             child: Row(
@@ -207,40 +237,20 @@ class _SightCardState extends State<SightCard> {
     return Container(
       height: 25,
       alignment: Alignment.centerRight,
-      child: IconButton(
-        // splashColor: widget._sight.isWished ? Colors.white : Colors.red,
-        padding: EdgeInsets.zero,
-        icon: SvgPicture.asset(
-          'res/icons/heart-white.svg',
-          color: widget._sight.isWished ? wishBtnColorActive : Colors.white,
-        ),
-        onPressed: () {
-          widget._sight.isWished = !widget._sight.isWished;
-          print("Wish-button pressed on place: " + widget._sight.name);
-          setState(() {});
-        },
-      ),
-    );
-  }
-
-  Widget _buildBottomPart() {
-    return Container(
-      height: 92,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(16),
-        ),
-        color: widget._backgroundColor,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            _buildTitle(),
-            _buildSpecificInfo(),
-            _buildSchedule(),
-          ],
-        ),
+      child: Stack(
+        children: [IconButton(
+          // splashColor: widget._sight.isWished ? Colors.white : Colors.red,
+          padding: EdgeInsets.zero,
+          icon: SvgPicture.asset(
+            'res/icons/heart-white.svg',
+            color: widget._sight.isWished ? wishBtnColorActive : Colors.white,
+          ),
+          onPressed: () {
+            widget._sight.isWished = !widget._sight.isWished;
+            print("Wish-button pressed on place: " + widget._sight.name);
+            setState(() {});
+          },
+        )],
       ),
     );
   }

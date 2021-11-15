@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
+import 'package:places/ui/widget/hr.dart';
 
 /// Экран карточки места
 class SightDetailsScreen extends StatefulWidget {
@@ -95,7 +96,8 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                             child: InkWell(
                               borderRadius: BorderRadius.circular(12),
                               onTap: () {
-                                print("Navigate to place: " + widget._sight.name);
+                                print(
+                                    "Navigate to place: " + widget._sight.name);
                               },
                             ),
                           ),
@@ -104,10 +106,8 @@ class _SightDetailsState extends State<SightDetailsScreen> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 24),
-                    height: 0.6,
-                    color: Colors.black.withAlpha(56),
-                  ),
+                      margin: EdgeInsets.only(top: 24),
+                      child: HorizontalLine()),
                   SizedBox(
                     height: 48,
                     child: Padding(
@@ -209,10 +209,17 @@ class SightDetailsGallery extends StatelessWidget {
             ),
             child: Material(
               type: MaterialType.transparency,
-              borderRadius: BorderRadius.circular(10),
-              child: IconButton(
-                icon: Icon(Icons.arrow_back_ios_sharp),
-                onPressed: () {
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  child: Icon(
+                    Icons.arrow_back_ios_sharp,
+                    size: 16,
+                  ),
+                ),
+                onTap: () {
                   print("Pressed back-button on place: " + _sight.name);
                 },
               ),
