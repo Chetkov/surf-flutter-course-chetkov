@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:places/domain/filter_model.dart';
+import 'package:places/domain/search_history_model.dart';
 import 'package:places/domain/settings_model.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/res/themes.dart';
@@ -25,8 +26,9 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<SettingsModel>(create: (context) => SettingsModel(false)),
-        Provider<FilterModel>(create: (context) => FilterModel(RangeValues(100, 10000))),
+        ListenableProvider<SettingsModel>(create: (context) => SettingsModel(false)),
+        ListenableProvider<FilterModel>(create: (context) => FilterModel(RangeValues(100, 10000))),
+        ListenableProvider<SearchHistoryModel>(create: (context) => SearchHistoryModel(searchHistory)),
       ],
       child: Consumer<SettingsModel>(
         builder: (context, value, child) => MaterialApp(
@@ -38,6 +40,7 @@ class _AppState extends State<App> {
               WishedOrVisitedSightListScreen(sightMocks),
               SettingsScreen(),
             ][_currentIndex],
+            // body: SightAddingScreen(),
             bottomNavigationBar:  BottomNavigationBar(
               showUnselectedLabels: false,
               currentIndex: _currentIndex,

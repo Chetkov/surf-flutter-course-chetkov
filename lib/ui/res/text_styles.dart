@@ -20,6 +20,15 @@ TextStyle _text = const TextStyle(
     textRegular18 = textRegular.copyWith(fontSize: 18),
     textRegular18Secondary = textRegular18.copyWith(color: textColorSecondary),
     textRegular18Third = textRegular18.copyWith(color: textColorThird),
+    textRegular24 = textRegular.copyWith(fontSize: 24),
+    textRegular24Secondary = textRegular24.copyWith(color: textColorSecondary),
+    textRegular24Third = textRegular24.copyWith(color: textColorThird),
+
+//w500
+    text16w500 = _text.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+    text16w500Secondary = text16w500.copyWith(color: textColorSecondary),
+    text24w500 = text16w500.copyWith(fontSize: 24),
+    text24w500Secondary = text24w500.copyWith(color: textColorSecondary),
 
 //Bold
     textBold = _text.copyWith(fontWeight: FontWeight.bold),

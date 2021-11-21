@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/text_styles.dart';
+import 'package:places/ui/screen/sight_details_screen.dart';
+import 'package:places/ui/screen/sight_list_screen.dart';
 
 class WishedSightCard extends SightCard {
   WishedSightCard(Sight sight) : super(sight);
@@ -174,6 +176,7 @@ class _SightCardState extends State<SightCard> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(16),
                 onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => SightDetailsScreen(widget._sight)));
                 },
               ),
             ),

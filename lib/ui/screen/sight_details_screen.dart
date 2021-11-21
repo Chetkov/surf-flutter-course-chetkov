@@ -212,14 +212,15 @@ class SightDetailsGallery extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
-                  width: 32,
-                  height: 32,
+                  width: 48,
+                  height: 48,
                   child: Icon(
                     Icons.arrow_back_ios_sharp,
                     size: 16,
                   ),
                 ),
                 onTap: () {
+                  Navigator.of(context).pop();
                   print("Pressed back-button on place: " + _sight.name);
                 },
               ),
